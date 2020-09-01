@@ -1,6 +1,6 @@
 library(keras)
 library(readxl)
-install_keras()
+#install_keras()
 mnist <-dataset_mnist()
 
 x_train <- mnist$train$x
@@ -28,12 +28,12 @@ nn<- keras_model_sequential()%>%
 
 summary(nn)
 
-model %>% compile(
+nn%>% compile(
   loss = "categorical_crossentropy",
   optimizer = optimizer_rmsprop(),
-  metrics = c("accuracy")
-)
-train01<-model %>% fit(
+  metrics = c("accuracy"))
+
+train01<-nn%>% fit(
   x_train, y_train, 
   epochs = 7, batch_size = 64, 
   validation_split = 0.25
@@ -41,5 +41,5 @@ train01<-model %>% fit(
 
 plot(train01)
 
-model %>% evaluate(x_test, y_test)
+nn %>% evaluate(x_test, y_test)
 
